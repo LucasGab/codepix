@@ -10,9 +10,9 @@ import (
 // Bank is ...
 type Bank struct {
 	Base     `valid:"required"`
-	Code     string     `json:"code" valid:"notnull"`
-	Name     string     `json:"name" valid:"notnull"`
-	Accounts []*Account `valid:"-"`
+	Code     string     `json:"code" gorm:"type:varchar(20);notnull" valid:"notnull"`
+	Name     string     `json:"name" gorm:"type:varchar(255);notnull" valid:"notnull"`
+	Accounts []*Account `gorm:"ForeignKey:BankID" valid:"-"`
 }
 
 // Is valid is ...

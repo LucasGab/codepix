@@ -10,11 +10,12 @@ import (
 
 // PixKeyRepositoryInterface is ..
 type PixKeyRepositoryInterface interface {
-	Register(pixKey *PixKey) (*PixKey, error)
+	RegisterKey(pixKey *PixKey) (*PixKey, error)
 	FindKeyByKind(key string, kind string) (*PixKey, error)
 	AddBank(bank *Bank) error
 	AddAccount(account *Account) error
 	FindAccount(id string) (*Account, error)
+	FindBank(id string) (*Bank, error)
 }
 
 // PixKey is ...
@@ -22,7 +23,7 @@ type PixKey struct {
 	Base      `valid:"required"`
 	Kind      string   `json:"kind" valid:"notnull"`
 	Key       string   `json:"key" valid:"notnull"`
-	AccountID string   `json:"account_id" valid:"notnull"`
+	AccountID string   `gorm:"column:account_id;type:uuid;not null" valid:"-"`
 	Account   *Account `valid:"-"`
 	Status    string   `json:"status" valid:"notnull"`
 }

@@ -93,15 +93,21 @@ func (transaction *Transaction) Confirm() error {
 }
 
 // NewTransaction is ...
-func NewTransaction(accountFrom *Account, amount float64, pixKeyTo *PixKey, description string) (*Transaction, error) {
+func NewTransaction(accountFrom *Account, amount float64, pixKeyTo *PixKey, description string, id string) (*Transaction, error) {
 	transaction := Transaction{
-		AccountFrom: accountFrom,
-		Amount:      amount,
-		PixKeyTo:    pixKeyTo,
-		Status:      TransactionPending,
-		Description: description,
+		AccountFrom:   accountFrom,
+		AccountFromID: accountFrom.ID,
+		Amount:        amount,
+		PixKeyTo:      pixKeyTo,
+		PixKeyIDTo:    pixKeyTo.ID,
+		Status:        TransactionPending,
+		Description:   description,
 	}
-
+	if id == "" {
+		transaction.ID = uuid.NewV4().String()
+	} else {
+		transaction.ID = id
+	}
 	transaction.ID = uuid.NewV4().String()
 	transaction.CreatedAt = time.Now()
 

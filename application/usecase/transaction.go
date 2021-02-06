@@ -9,7 +9,7 @@ type TransactionUseCase struct {
 }
 
 // Register is ...
-func (t *TransactionUseCase) Register(accountID string, amount float64, pixKeyTo string, pixKeyKindTo string, description string) (*model.Transaction, error) {
+func (t *TransactionUseCase) Register(accountID string, amount float64, pixKeyTo string, pixKeyKindTo string, description string, id string) (*model.Transaction, error) {
 
 	account, err := t.PixRepository.FindAccount(accountID)
 	if err != nil {
@@ -21,7 +21,7 @@ func (t *TransactionUseCase) Register(accountID string, amount float64, pixKeyTo
 		return nil, err
 	}
 
-	transaction, err := model.NewTransaction(account, amount, pixKey, description)
+	transaction, err := model.NewTransaction(account, amount, pixKey, description, id)
 	if err != nil {
 		return nil, err
 	}

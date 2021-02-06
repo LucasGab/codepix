@@ -4,8 +4,17 @@ import (
 	"fmt"
 
 	"github.com/LucasGab/codepix-go/domain/model"
-	"gorm.io/gorm"
+	"github.com/jinzhu/gorm"
 )
+
+// type PixKeyRepositoryInterface interface {
+// 	RegisterKey(pixKey *PixKey) (*PixKey, error)
+// 	FindKeyByKind(key string, kind string) (*PixKey, error)
+// 	AddBank(bank *Bank) error
+// 	AddAccount(account *Account) error
+// 	FindAccount(id string) (*Account, error)
+// 	FindBank(id string) (*Bank, error)
+// }
 
 // PixKeyRepositoryDb is ...
 type PixKeyRepositoryDb struct {
